@@ -16,7 +16,13 @@ class shoppingCartImpl implements ShoppingCart{
 
     @Override
     public void add(Product product) {
-
+        var item = findItemByProduct(product.getId());
+        if (item == null){
+            item = new SaleItem();
+            item.setProduct(product);
+            items.add(item);
+        }
+        item.addOne();
     }
 
     @Override
@@ -41,4 +47,32 @@ class shoppingCartImpl implements ShoppingCart{
         }
         return total;
     }
+
+    @Override
+    public List<SaleItem> items() {
+        return new ArrayList<SaleItem>(items);
+    }
+
+    private SaleItem findItemByProduct(int product){
+        for (SaleItem item : items){
+            if (item.getProduct().getId() == product){
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void changeItemCount(boolean plus, int productId) {
+        var item = findItemByProduct(productId);
+        if (item != null){
+            item.changeCount(plus);
+            if (item.getCount() == 0){
+                items.remove(item);
+            }
+        }
+    }
+
+
+
 }

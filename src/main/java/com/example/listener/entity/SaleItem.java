@@ -27,4 +27,16 @@ public class SaleItem {
     public void setCount(int count) {
         this.count = count;
     }
+
+    public void addOne(){
+        count++;
+    }
+
+    public void changeCount(boolean plus){
+        if (plus){
+            count++;
+        }else{
+            count--;
+        }
+    }
 }

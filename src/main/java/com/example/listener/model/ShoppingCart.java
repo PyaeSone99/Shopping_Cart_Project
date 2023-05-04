@@ -1,8 +1,10 @@
 package com.example.listener.model;
 
 import com.example.listener.entity.Product;
+import com.example.listener.entity.SaleItem;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface ShoppingCart extends Serializable {
 
@@ -11,6 +13,9 @@ public interface ShoppingCart extends Serializable {
     void clear();
     int total();
     public static ShoppingCart generate(){
-        return null;
+        return new shoppingCartImpl();
     }
+
+    public void changeItemCount(boolean plus,int productId);
+    List<SaleItem> items();
 }
